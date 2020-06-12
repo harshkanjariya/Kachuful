@@ -317,7 +317,6 @@ public class PlayActivity extends AppCompatActivity {
             }
         }
         points=new Point[game.players.size()-(game.off==null?0:game.off.size())];
-        if (points.length==0)return;
         int cx= (int) (w/2),cy= (int) (h/2);
         int a=90;
         int d=360/points.length;
@@ -1035,7 +1034,6 @@ public class PlayActivity extends AppCompatActivity {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawers();
         }else{
-            if (game==null || game.task==null)return;
             if(!game.task.isEmpty() && !game.task.equals("loadgame")){
                 Toast.makeText(this,"wait until the current round ends!",Toast.LENGTH_SHORT).show();
             }else{
