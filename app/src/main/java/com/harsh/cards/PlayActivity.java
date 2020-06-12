@@ -317,6 +317,7 @@ public class PlayActivity extends AppCompatActivity {
             }
         }
         points=new Point[game.players.size()-(game.off==null?0:game.off.size())];
+        if (points.length==0)return;
         int cx= (int) (w/2),cy= (int) (h/2);
         int a=90;
         int d=360/points.length;
