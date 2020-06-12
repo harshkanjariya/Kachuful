@@ -254,7 +254,8 @@ public class StartGame extends AppCompatActivity {
             return emails.size();
         }
         void reload(){
-            if (game.players.size()!=game.sequence.size())
+            if (game==null || game.players==null || game.sequence==null)return;
+            if(game.players.size()!=game.sequence.size())
                 emails=new ArrayList<>(game.players.keySet());
             else
                 emails= (ArrayList<String>) game.sequence.clone();

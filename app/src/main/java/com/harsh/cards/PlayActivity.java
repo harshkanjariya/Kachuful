@@ -18,7 +18,6 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +51,7 @@ import java.util.Objects;
 
 public class PlayActivity extends AppCompatActivity {
     private boolean host;
-    private String myid,joinid;
+    private String myid;
     private Game game;
     Point[]points;
     GameView canvas;
@@ -83,8 +82,14 @@ public class PlayActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
         host=intent.getBooleanExtra("host",false);
-        joinid=intent.getStringExtra("joinid");
+        String joinid = intent.getStringExtra("joinid");
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        String mail=user.getEmail();
+        if (mail==null){
+            Toast.makeText(this,"Email Invalid!",Toast.LENGTH_SHORT).show();
+            return;
+        }
         myid=user.getEmail().replaceAll("\\.",",");
 
         canvas=new GameView(this);
@@ -110,7 +115,7 @@ public class PlayActivity extends AppCompatActivity {
         findViewById(R.id.close_btn).bringToFront();
 
         ref= FirebaseDatabase.getInstance().getReference().child("users");
-        db=ref.child(joinid+"/game");
+        db=ref.child(joinid +"/game");
         cards=new Bitmap[53];
         getCards();
 
@@ -159,6 +164,7 @@ public class PlayActivity extends AppCompatActivity {
                         if (game.leaderboard!=null)
                             leaderboard();
                     }
+                    if (game.task!=null)
                     switch (game.task) {
                         case "loadgame":
                             loadgame();
@@ -351,6 +357,7 @@ public class PlayActivity extends AppCompatActivity {
         drawerLayout.openDrawer(GravityCompat.START);
     }
     public void loadshuffle(){
+        if (game!=null && game.z!=null)
         for (int i=game.z.size()-1;i>=0;i--)
             cardsimg[game.z.get(i)].bringToFront();
     }
@@ -373,6 +380,7 @@ public class PlayActivity extends AppCompatActivity {
         }).start();
     }
     public void sharecards(View view) {
+        if (game==null || game.players==null || game.z==null)return;
         if (view.getId()==R.id.sharebtn){
             shufflecards();
             findViewById(R.id.sharelayout).setVisibility(View.VISIBLE);
@@ -450,7 +458,8 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
     public void distribute(){
-        if (game.CurrentCards==null || !game.CurrentCards.containsKey(myid) || game.CurrentCards.get(myid).isEmpty())return;
+        if (game.CurrentCards==null || !game.CurrentCards.containsKey(myid) || game.CurrentCards.get(myid).isEmpty()
+        || keys==null)return;
         int indx=keys.indexOf(myid);
         canvas.invalidate();
         for(Point p:points){
