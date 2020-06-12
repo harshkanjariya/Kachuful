@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "997673869117",
+    "firebase_url": "https://hk-cards.firebaseio.com",
+    "project_id": "hk-cards",
+    "storage_bucket": "hk-cards.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997673869117:android:aca968b0fb23ec35586f54",
+        "android_client_info": {
+          "package_name": "com.harsh.cards"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997673869117-qf552616vopoaeri36dc4ref67gfqj7f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.harsh.cards",
+            "certificate_hash": "c78c56545a6dd1a8b8a28051537e18f15ebe7952"
+          }
+        },
+        {
+          "client_id": "997673869117-0brq0h1qa9rub484fc99qd4h1tp6memm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq9_-3Dp5oSEGr9sZOQzPwo6NsKcC4Yiw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997673869117-0brq0h1qa9rub484fc99qd4h1tp6memm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
