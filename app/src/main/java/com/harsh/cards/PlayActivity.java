@@ -786,6 +786,7 @@ public class PlayActivity extends AppCompatActivity {
                 .setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if (game!=null && game.sequence!=null)
                         for (String p:game.sequence)
                             ref.child(p).child("joined").removeValue();
                         db.child("task").setValue("end");
@@ -1035,6 +1036,7 @@ public class PlayActivity extends AppCompatActivity {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawers();
         }else{
+            if (game==null || game.task==null)return;
             if(!game.task.isEmpty() && !game.task.equals("loadgame")){
                 Toast.makeText(this,"wait until the current round ends!",Toast.LENGTH_SHORT).show();
             }else{
