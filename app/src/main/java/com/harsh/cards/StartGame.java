@@ -337,6 +337,7 @@ public class StartGame extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which){
                         if (host){
+                            if (game!=null && game.players!=null)
                             for (String p:game.players.keySet())
                                 db.child(p).child("joined").removeValue();
                             db.child(myid).child("game").removeValue();

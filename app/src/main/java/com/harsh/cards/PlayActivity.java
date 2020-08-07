@@ -217,6 +217,7 @@ public class PlayActivity extends AppCompatActivity {
                                     currentTable.animate().translationY(0).setDuration(500).start();
                                     current_table();
                                 } else {
+                                    if(mycards!=null)
                                     for (int c : mycards) {
                                         cardsimg[c].bringToFront();
                                         cardsimg[c].setColorFilter(Color.argb(100, 0, 0, 0));
