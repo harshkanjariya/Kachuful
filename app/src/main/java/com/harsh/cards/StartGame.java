@@ -254,7 +254,8 @@ public class StartGame extends AppCompatActivity {
             return emails.size();
         }
         void reload(){
-            if (game.players.size()!=game.sequence.size())
+            if (game==null || game.players==null || game.sequence==null)return;
+            if(game.players.size()!=game.sequence.size())
                 emails=new ArrayList<>(game.players.keySet());
             else
                 emails= (ArrayList<String>) game.sequence.clone();
@@ -336,6 +337,7 @@ public class StartGame extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which){
                         if (host){
+                            if (game!=null && game.players!=null)
                             for (String p:game.players.keySet())
                                 db.child(p).child("joined").removeValue();
                             db.child(myid).child("game").removeValue();
